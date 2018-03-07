@@ -1,0 +1,48 @@
+<body>
+	<div class="container">
+		<h1>Welcome to the URL-APP!</h1>
+
+		<ul>
+			<li>Enter a new URL in the text box below</li>
+			<li>The app will generate a new URL to be shared, and will track stats</li>
+			<li>Any user who clicks the generated link, will be redirected to the original URL</li>
+		</ul>
+
+		<form class="new-url">
+          <input type="text" name="text" placeholder="Type to add new url" />
+        </form>
+
+        <div class="row">
+        	<div class="col-md-6">
+		        <div class="list-group">
+		      		{{#each urls}}
+		        		{{> url}}
+		      		{{/each}}
+		    	</div>
+	    	</div>
+	    	<div class="col-md-6">
+	    		{{#if getSelectedUrl}}
+	    			{{> urlDetails getSelectedUrl}}
+	    		{{/if}}
+	    		
+	    	</div>
+    	</div>
+	</div>
+</body>
+
+<template name="url">
+	<a href="#" class="list-group-item list-group-item-action" id="{{_id}}">
+		<strong id="{{_id}}">{{url}}</strong>
+		<span class="badge badge-primary badge-pill">{{count}}</span>
+	</a>
+</template>
+
+<template name="urlDetails">
+	<strong>{{url}}</strong>
+	<br>
+	Created: {{createdAt}}
+	<br>
+	ShortURL: <a class="short-link" href="/{{_id}}">localhost:3000/{{_id}}</a>
+	<br>
+	Count: {{count}}
+</template>
